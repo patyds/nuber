@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         _db = FirebaseDatabase.getInstance().getReference("salands")
 
-
+        supportActionBar?.title = "Select User"
 
 
     }

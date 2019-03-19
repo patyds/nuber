@@ -1,5 +1,6 @@
 package com.example.nuber
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -36,6 +37,9 @@ class LoginActivity : AppCompatActivity() {
                 if(!it.isSuccessful) return@addOnCompleteListener
                 Toast.makeText(applicationContext,
                     " id: ${it.result!!.user.uid}", Toast.LENGTH_LONG).show()
+
+                val intent = Intent(this, NUberMapsActivity::class.java)
+                startActivity(intent)
             }
             .addOnFailureListener {
                 Toast.makeText(applicationContext,
