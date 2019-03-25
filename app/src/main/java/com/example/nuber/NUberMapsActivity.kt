@@ -18,7 +18,6 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.maps.model.Marker
 import com.google.firebase.auth.FirebaseAuth
 
@@ -59,7 +58,7 @@ class NUberMapsActivity : AppCompatActivity(),
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-
+        setUpMap()
         // Add a marker in Sydney and move the camera
         mMap.getUiSettings().setZoomControlsEnabled(true)
         mMap.setOnMarkerClickListener(this)
@@ -75,7 +74,7 @@ class NUberMapsActivity : AppCompatActivity(),
             }
         }
 
-        setUpMap()
+
     }
 
     private fun placeMarkerOnMap(location: LatLng) {
