@@ -7,6 +7,10 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.fragment_nuber_products.*
 
 
@@ -41,9 +45,26 @@ class NuberProductsFragment : Fragment() {
 
         list_recycler_view.apply {
             layoutManager = LinearLayoutManager(activity)
-            adapter = NuberProductsAdapter(salads)
+            adapter = NuberProductsAdapter(mutableListOf<Salad>())
         }
+        getProduct()
     }
+    private fun getProduct(){
+        val ref = FirebaseDatabase.getInstance().getReference("/salads")
+        ref.addValueEventListener(object: ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
 
+            override fun onDataChange(p0: DataSnapshot) {
+               val lista = mutableListOf<Salad>()
+                p0.children.forEach{
+                    val producto = it.getValue(Salad::class.java)
+                    lista.add(producto!!)
+                }
+                list_recycler_view.adapter = NuberProductsAdapter(lista)
+            }
+        })
+    }
 
 }

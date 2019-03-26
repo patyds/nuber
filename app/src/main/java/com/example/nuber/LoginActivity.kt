@@ -7,6 +7,7 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 
+
 class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +39,7 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext,
                     " id: ${it.result!!.user.uid}", Toast.LENGTH_LONG).show()
 
-                val intent = Intent(this, NUberMapsActivity::class.java)
+                val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             }
             .addOnFailureListener {

@@ -22,7 +22,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.firebase.auth.FirebaseAuth
 
 
-class NUberMapsActivity : AppCompatActivity(),
+class NUberMapsActivity : SupportMapFragment(),
     OnMapReadyCallback , GoogleMap.OnMarkerClickListener{
 
     override fun onMarkerClick(p0: Marker?) = false
@@ -33,17 +33,13 @@ class NUberMapsActivity : AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_nuber_maps)
 
 
         checkUserLogged()
 
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity!!)
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used
     }
 
     /**
@@ -58,13 +54,12 @@ class NUberMapsActivity : AppCompatActivity(),
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        setUpMap()
         // Add a marker in Sydney and move the camera
         mMap.getUiSettings().setZoomControlsEnabled(true)
         mMap.setOnMarkerClickListener(this)
         mMap.isMyLocationEnabled = true
         mMap.mapType = GoogleMap.MAP_TYPE_TERRAIN
-        fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
+        fusedLocationClient.lastLocation.addOnSuccessListener(activity!!) { location ->
             if (location != null) {
                 lastLocation = location
                 val currentLatLng = LatLng(location.latitude, location.longitude)
@@ -84,46 +79,15 @@ class NUberMapsActivity : AppCompatActivity(),
         mMap.addMarker(markerOptions)
     }
 
-    private  val LOCATION_PERMISSION_REQUEST_CODE = 666
-    private fun setUpMap() {
-        if (ActivityCompat.checkSelfPermission(this,
-                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
-            return
-        }
-    }
-
 
     private fun checkUserLogged() {
         val uid = FirebaseAuth.getInstance().uid
         if (uid == null) {
-            val intent = Intent(this, RegisterActivity::class.java)
+            val intent = Intent(activity!!, RegisterActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when(item?.itemId){
-            R.id.buy_item  -> {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-
-            }
-            R.id.log_out ->{
-                FirebaseAuth.getInstance().signOut()
-                val intent = Intent(this, RegisterActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
-
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
 }
