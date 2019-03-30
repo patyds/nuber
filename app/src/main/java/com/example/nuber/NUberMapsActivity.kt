@@ -89,5 +89,9 @@ class NUberMapsActivity : SupportMapFragment(),
         }
     }
 
+    companion object {
+        fun newInstance(): NUberMapsActivity = NUberMapsActivity()
+    }
+
 
 }

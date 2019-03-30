@@ -67,4 +67,8 @@ class NuberProductsFragment : Fragment() {
         })
     }
 
+    companion object {
+        fun newInstance(): NuberProductsFragment = NuberProductsFragment()
+    }
+
 }

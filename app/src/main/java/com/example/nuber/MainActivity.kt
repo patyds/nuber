@@ -4,7 +4,9 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.ActivityCompat
+import android.support.v4.app.Fragment
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -23,21 +25,51 @@ class MainActivity : AppCompatActivity() {
     lateinit var _db: DatabaseReference
 
     val fragmentAdapter = NuberPagerAdapter(supportFragmentManager)
+    lateinit var map : NUberMapsActivity
+    val shopping = NuberShoppingFragment.newInstance()
+    val cart  = NuberProductsFragment.newInstance()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         setUpMap()
-        viewpager_main.adapter = fragmentAdapter
+        map = NUberMapsActivity.newInstance()
+        val bottomNavigation : BottomNavigationView = findViewById(R.id.navigation_menu )
+        bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-        tabs_main.setupWithViewPager(viewpager_main)
+
     }
 
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         return super.onCreateOptionsMenu(menu)
+    }
+
+    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
+            R.id.navigation_map -> {
+                openFragment(map)
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_shopping -> {
+                openFragment(shopping)
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_cart -> {
+                openFragment(cart)
+                return@OnNavigationItemSelectedListener true
+            }
+        }
+        false
+    }
+
+    private fun openFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.container, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
