@@ -20,7 +20,6 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_main.*
 
-
 class MainActivity : AppCompatActivity() {
     lateinit var _db: DatabaseReference
 
@@ -37,8 +36,6 @@ class MainActivity : AppCompatActivity() {
         map = NUberMapsActivity.newInstance()
         val bottomNavigation : BottomNavigationView = findViewById(R.id.navigation_menu )
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-
-
     }
 
 
@@ -111,4 +108,5 @@ class MainActivity : AppCompatActivity() {
 data class Salad(
     val name: String = "",
     val description: String = "",
-    var uuid: String = "")
+    var uuid: String = "",
+    var location: String = "")

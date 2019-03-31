@@ -40,6 +40,8 @@ class NUberMapsActivity : SupportMapFragment(),
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity!!)
         // Obtain the SupportMapFragment and get notified when the map is ready to be used
+
+        getMapAsync(this)
     }
 
     /**
@@ -68,8 +70,6 @@ class NUberMapsActivity : SupportMapFragment(),
                 placeMarkerOnMap(currentLatLng)
             }
         }
-
-
     }
 
     private fun placeMarkerOnMap(location: LatLng) {
