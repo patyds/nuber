@@ -54,6 +54,8 @@ class RegisterActivity : AppCompatActivity() {
 
         val username = username_edittext.text.toString()
 
+        Toast.makeText(this, "$email $password $username", Toast.LENGTH_LONG).show()
+
         if (email.isEmpty() || password.isEmpty()|| username.isEmpty() ) {
             Toast.makeText(this, "Please fill out email/pw / user.", Toast.LENGTH_SHORT).show()
             return
