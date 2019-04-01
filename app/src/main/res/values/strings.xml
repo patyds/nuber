@@ -29,9 +29,16 @@
     </string-array>
 
     <string-array name="salads_descriptions">
-        <item>Caesar Salad</item>
-        <item>Italian Salad</item>
-        <item>Ensalada del Campo</item>
-        <item>Ensalada Carnívora</item>
+        <item>Ensalada tipo césar con tomates frescos de la mañana.</item>
+        <item>Ensalada de la tierra europea, preparada con toda la sazón italiana.</item>
+        <item>Ensalada con ingredientes orgánicos 100% mexicanos. Contiene todo el amor de la cocina ambientalista.</item>
+        <item>Ensalada con lechuga chiapaneca, jitomate, aguacate, semillas de girasol, y carne fresca.</item>
+    </string-array>
+
+    <string-array name="salads_prices">
+        <item>89.59</item>
+        <item>129.99</item>
+        <item>61.88</item>
+        <item>108.00</item>
     </string-array>
 </resources>

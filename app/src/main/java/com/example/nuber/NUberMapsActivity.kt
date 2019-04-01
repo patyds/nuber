@@ -98,7 +98,7 @@ class NUberMapsActivity : SupportMapFragment(),
                 placeMarkerOnMap(origin, "Casualidades")
 
 
-               /* val url = getURL(origin, currentLatLng)
+               val url = getURL(origin, currentLatLng)
 
                 async {
                     // Connect to URL, download content and convert into string asynchronously
@@ -111,27 +111,28 @@ class NUberMapsActivity : SupportMapFragment(),
                         System.out.println("jsonn  $json")
                         // get to the correct element in JsonObject
                         val routes = json.array<JsonObject>("routes")
-
-                        val points = routes!!["legs"]["steps"][0] as JsonArray<JsonObject>
-                        // For every element in the JsonArray, decode the polyline string and pass all points to a List
-                        val polypts = points.flatMap { decodePoly(it.obj("polyline")?.string("points")!!)  }
-                        // Add  points to polyline and bounds
-                        options.add(origin)
-                        LatLongB.include(origin)
-                        for (point in polypts)  {
-                            options.add(point)
-                            LatLongB.include(point)
+                        if (routes!!.size > 0) {
+                            val points = routes!!["legs"]["steps"][0] as JsonArray<JsonObject>
+                            // For every element in the JsonArray, decode the polyline string and pass all points to a List
+                            val polypts = points.flatMap { decodePoly(it.obj("polyline")?.string("points")!!)  }
+                            // Add  points to polyline and bounds
+                            options.add(origin)
+                            LatLongB.include(origin)
+                            for (point in polypts)  {
+                                options.add(point)
+                                LatLongB.include(point)
+                            }
+                            options.add(currentLatLng)
+                            LatLongB.include(currentLatLng)
+                            // build bounds
+                            val bounds = LatLongB.build()
+                            // add polyline to the map
+                            mMap!!.addPolyline(options)
+                            // show map with route centered
+                            mMap!!.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100))
                         }
-                        options.add(currentLatLng)
-                        LatLongB.include(currentLatLng)
-                        // build bounds
-                        val bounds = LatLongB.build()
-                        // add polyline to the map
-                        mMap!!.addPolyline(options)
-                        // show map with route centered
-                        mMap!!.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100))
                     }
-                }*/
+                }
             }
         }
 
@@ -148,7 +149,7 @@ class NUberMapsActivity : SupportMapFragment(),
         val dest = "destination=" + to.latitude + "," + to.longitude
         val sensor = "sensor=false"
         val params = "$origin&$dest&$sensor"
-        return "https://maps.googleapis.com/maps/api/directions/json?$params&key=AIzaSyBwWPYkkczHtyydJuVsHzYPrZgxFSjRusM"
+        return "https://maps.googleapis.com/maps/api/directions/json?$params&key=AIzaSyCCoAqXT9KITzr8MbT14ooeMsNh6l4kWpE"
     }
 
     private  val LOCATION_PERMISSION_REQUEST_CODE = 666

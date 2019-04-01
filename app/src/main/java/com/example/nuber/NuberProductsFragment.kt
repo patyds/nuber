@@ -57,12 +57,15 @@ class NuberProductsFragment : Fragment() {
             }
 
             override fun onDataChange(p0: DataSnapshot) {
-               val lista = mutableListOf<Salad>()
+                val lista = mutableListOf<Salad>()
+                var total = 0.0
                 p0.children.forEach{
                     val producto = it.getValue(Salad::class.java)
                     lista.add(producto!!)
+                    total += producto.price
                 }
-                list_recycler_view.adapter = NuberProductsAdapter(lista)
+                subtotal_textView?.text = "$${String.format("%.2f", total)}"
+                list_recycler_view?.adapter = NuberProductsAdapter(lista)
             }
         })
     }

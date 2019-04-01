@@ -14,20 +14,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/salad_spinner"
                 android:layout_marginBottom="10dp"
-                android:dropDownWidth="match_parent"/>
-        <TextView
-                android:text="TextView"
+                android:dropDownWidth="match_parent" android:entries="@array/salads_array"/>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/description_textView"
-                android:layout_marginBottom="10dp"/>
+                android:layout_height="wrap_content">
+            <TextView
+                    android:text="$100.00"
+                    android:paddingRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" android:id="@+id/price_textView"
+                    android:layout_weight="0"
+                    android:textSize="30sp"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:id="@+id/description_textView"
+                    android:layout_weight="1" android:gravity="center_vertical"/>
+        </LinearLayout>
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:inputType="textMultiLine"
                 android:ems="10"
-                android:id="@+id/editText2"/>
+                android:id="@+id/observations_editText" android:hint="Observations"/>
         <Button
-                android:text="Send"
+                android:text="Add to cart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/send_salad_button"

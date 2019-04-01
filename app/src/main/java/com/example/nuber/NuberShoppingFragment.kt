@@ -15,7 +15,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_nuber_shopping.*
-
+import kotlinx.android.synthetic.main.fragment_nuber_shopping.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,7 +30,6 @@ class NuberShoppingFragment : Fragment() {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var lastLocation : Location
-    private lateinit var saladSpinner : View
 
     var salads_items = arrayOf("Caesar Salad", "Italian Salad", "Mexican Salad")
     var salads_descriptions = arrayOf("Ensalada estilo césar", "Ensalada tipo italiana", "Ensalada a la mexicana")
@@ -47,24 +46,22 @@ class NuberShoppingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        // saladSpinner = inflater!!.inflate(R.layout.fragment_nuber_shopping, salad_spinner, false)
-        saladSpinner = salad_spinner
-        (saladSpinner as Spinner).adapter = ArrayAdapter(activity!!,
-                R.layout.support_simple_spinner_dropdown_item, resources.getStringArray(R.array.salads_array)) as SpinnerAdapter?
-        (saladSpinner as Spinner).onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+        var view = inflater!!.inflate(R.layout.fragment_nuber_shopping, container, false)
+        view.salad_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 selected_salad = position
-                description_textView.text = resources.getStringArray(R.array.salads_descriptions)[selected_salad]
+                description_textView.text = resources.getStringArray(R.array.salads_descriptions)[position]
+                price_textView.text = "$${resources.getStringArray(R.array.salads_prices)[position]}"
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
 
             }
 
         }
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_nuber_shopping, container, false)
+        return view
     }
 
     @SuppressLint("MissingPermission")
@@ -79,8 +76,12 @@ class NuberShoppingFragment : Fragment() {
                     val  _db = FirebaseDatabase.getInstance().getReference("salads")
                     val k = _db.push().key
 
-                    val s = Salad(salads_items[selected_salad],
-                        description_textView.text.toString(), currentLatLng.toString(), k.toString())
+                    var s = Salad(k.toString(),
+                        resources.getStringArray(R.array.salads_array)[selected_salad],
+                        observations_editText.text.toString(),
+                        currentLatLng.toString(),
+                        resources.getStringArray(R.array.salads_prices)[selected_salad].toDouble(),
+                        resources.getStringArray(R.array.salads_descriptions)[selected_salad])
 
                     _db.child(k!!).setValue(s).addOnCompleteListener {
                         Toast.makeText(activity, "Your purchase has been placed", Toast.LENGTH_LONG).show()

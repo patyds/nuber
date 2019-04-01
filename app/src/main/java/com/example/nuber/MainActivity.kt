@@ -109,7 +109,9 @@ class MainActivity : AppCompatActivity() {
 
 
 data class Salad(
-    val name: String = "",
-    val description: String = "",
     var uuid: String = "",
-    var location: String = "")
+    var name: String = "",
+    val observations: String = "",
+    var location: String = "",
+    var price: Double = 0.0,
+    var description: String = "")
