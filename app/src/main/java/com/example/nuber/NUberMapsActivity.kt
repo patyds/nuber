@@ -149,7 +149,7 @@ class NUberMapsActivity : SupportMapFragment(),
         val dest = "destination=" + to.latitude + "," + to.longitude
         val sensor = "sensor=false"
         val params = "$origin&$dest&$sensor"
-        return "https://maps.googleapis.com/maps/api/directions/json?$params&key=AIzaSyCCoAqXT9KITzr8MbT14ooeMsNh6l4kWpE"
+        return "https://maps.googleapis.com/maps/api/directions/json?$params&key=${R.string.google_maps_key}"
     }
 
     private  val LOCATION_PERMISSION_REQUEST_CODE = 666
