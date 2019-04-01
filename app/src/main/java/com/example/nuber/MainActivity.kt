@@ -35,10 +35,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setUpMap()
         map = NUberMapsActivity.newInstance()
-        val bottomNavigation : BottomNavigationView = findViewById(R.id.navigation_menu )
+
+        val bottomNavigation : BottomNavigationView = findViewById(R.id.navigation_menu)
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-
+        openFragment(map)
     }
 
 
