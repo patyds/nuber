@@ -3,6 +3,7 @@ package com.example.nuber
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
@@ -29,7 +30,9 @@ class LoginActivity : AppCompatActivity() {
         val password = password_edittext.text.toString()
 
         if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Please fill out email/pw.", Toast.LENGTH_SHORT).show()
+            Snackbar.make(this.currentFocus, "Please fill out email/pw.", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show()
+            //Toast.makeText(this, "Please fill out email/pw.", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -39,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext,
                     " id: ${it.result!!.user.uid}", Toast.LENGTH_LONG).show()
 
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, Main2Activity::class.java)
                 startActivity(intent)
             }
             .addOnFailureListener {

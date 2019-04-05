@@ -4,6 +4,7 @@ package com.example.nuber
 import android.annotation.SuppressLint
 import android.location.Location
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -84,7 +85,9 @@ class NuberShoppingFragment : Fragment() {
                         resources.getStringArray(R.array.salads_descriptions)[selected_salad])
 
                     _db.child(k!!).setValue(s).addOnCompleteListener {
-                        Toast.makeText(activity, "Your purchase has been placed", Toast.LENGTH_LONG).show()
+                        Snackbar.make(activity!!.currentFocus, "Your purchase has been placed", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show()
+                        //Toast.makeText(activity, "Your purchase has been placed", Toast.LENGTH_LONG).show()
                     }
                 }
             }

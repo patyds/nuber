@@ -6,6 +6,7 @@ import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.support.design.widget.Snackbar
 import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
@@ -57,7 +58,9 @@ class RegisterActivity : AppCompatActivity() {
         Toast.makeText(this, "$email $password $username", Toast.LENGTH_LONG).show()
 
         if (email.isEmpty() || password.isEmpty()|| username.isEmpty() ) {
-            Toast.makeText(this, "Please fill out email/pw / user.", Toast.LENGTH_SHORT).show()
+            Snackbar.make(this.currentFocus, "Please fill out email/pw.", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show()
+            //Toast.makeText(this, "Please fill out email/pw / user.", Toast.LENGTH_SHORT).show()
             return
         }
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password)

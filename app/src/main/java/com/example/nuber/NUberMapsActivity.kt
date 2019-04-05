@@ -170,14 +170,7 @@ class NUberMapsActivity : SupportMapFragment(),
     }
 
 
-    private fun checkUserLogged() {
-        val uid = FirebaseAuth.getInstance().uid
-        if (uid == null) {
-            val intent = Intent(activity!!, RegisterActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-        }
-    }
+
 
 
 

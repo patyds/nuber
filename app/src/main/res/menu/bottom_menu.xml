@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/navigation_map"
-          android:title="Map"/>
-    <item android:id="@+id/navigation_shopping"
-          android:title="Shopping"/>
-    <item android:id="@+id/navigation_cart"
-          android:title="Cart"/>
-</menu>

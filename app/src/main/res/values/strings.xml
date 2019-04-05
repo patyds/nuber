@@ -31,7 +31,8 @@
     <string-array name="salads_descriptions">
         <item>Ensalada tipo césar con tomates frescos de la mañana.</item>
         <item>Ensalada de la tierra europea, preparada con toda la sazón italiana.</item>
-        <item>Ensalada con ingredientes orgánicos 100% mexicanos. Contiene todo el amor de la cocina ambientalista.</item>
+        <item>Ensalada con ingredientes orgánicos 100% mexicanos. Contiene todo el amor de la cocina ambientalista.
+        </item>
         <item>Ensalada con lechuga chiapaneca, jitomate, aguacate, semillas de girasol, y carne fresca.</item>
     </string-array>
 
@@ -41,4 +42,11 @@
         <item>61.88</item>
         <item>108.00</item>
     </string-array>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
 </resources>
