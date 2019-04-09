@@ -54,7 +54,7 @@ class NUberMapsActivity : SupportMapFragment(),
         super.onCreate(savedInstanceState)
 
 
-        checkUserLogged()
+       // checkUserLogged()
 
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity!!)
@@ -149,7 +149,7 @@ class NUberMapsActivity : SupportMapFragment(),
         val dest = "destination=" + to.latitude + "," + to.longitude
         val sensor = "sensor=false"
         val params = "$origin&$dest&$sensor"
-        return "https://maps.googleapis.com/maps/api/directions/json?$params&key=${R.string.google_maps_key}"
+        return "https://maps.googleapis.com/maps/api/directions/json?$params&key=AIzaSyBwWPYkkczHtyydJuVsHzYPrZgxFSjRusM"
     }
 
     private  val LOCATION_PERMISSION_REQUEST_CODE = 666
